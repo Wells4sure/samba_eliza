@@ -11,8 +11,8 @@ export function Story() {
             <CardContent className="p-8">
               <h3 className="text-2xl font-serif text-gray-800 mb-4">How We Met</h3>
               <p className="text-gray-600 leading-relaxed">
-                We first crossed paths at a coffee shop in downtown Portland on a rainy Tuesday morning. Michael was
-                reading a book about astronomy, and Sarah couldn't help but notice the beautiful illustrations of
+                We first crossed paths at a coffee shop in downtown Portland on a rainy Tuesday morning. Samba was
+                reading a book about astronomy, and Elizabeth couldn't help but notice the beautiful illustrations of
                 constellations. A conversation about the stars led to our first date under them.
               </p>
             </CardContent>
@@ -22,7 +22,7 @@ export function Story() {
             <CardContent className="p-8">
               <h3 className="text-2xl font-serif text-gray-800 mb-4">The Proposal</h3>
               <p className="text-gray-600 leading-relaxed">
-                Three years later, Michael recreated that magical first conversation by taking Sarah back to the same
+                Three years later, Samba recreated that magical first conversation by taking Elizabeth back to the same
                 coffee shop. But this time, he had a surprise waiting outside - a telescope pointed at the constellation
                 where "their star" shines brightest, and a ring that sparkled just as bright.
               </p>
