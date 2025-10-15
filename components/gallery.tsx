@@ -8,7 +8,7 @@ export function Gallery() {
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className="aspect-square bg-gradient-to-br from-rose-200 to-pink-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center justify-center"
+              className="aspect-square bg-gradient-to-br from-amber-200 to-yellow-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center justify-center"
             >
               <span className="text-white/70 text-sm">Photo {i + 1}</span>
             </div>

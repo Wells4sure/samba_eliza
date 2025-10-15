@@ -32,10 +32,10 @@ export function RSVP() {
     return (
       <section id="rsvp" className="py-20 px-4 bg-white/50">
         <div className="max-w-2xl mx-auto text-center">
-          <Card className="border-rose-200">
+          <Card className="border-amber-300 shadow-lg">
             <CardContent className="p-8">
               <h2 className="text-3xl font-serif text-gray-800 mb-4">Thank You!</h2>
-              <p className="text-gray-600">We've received your RSVP and can't wait to celebrate with you!</p>
+              <p className="text-gray-700">We've received your RSVP and can't wait to celebrate with you!</p>
             </CardContent>
           </Card>
         </div>
@@ -48,7 +48,7 @@ export function RSVP() {
       <div className="max-w-2xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-serif text-center text-gray-800 mb-16">RSVP</h2>
 
-        <Card className="border-rose-200">
+        <Card className="border-amber-300 shadow-lg">
           <CardHeader>
             <CardTitle className="text-2xl font-serif text-center">Please respond by May 1st, 2024</CardTitle>
           </CardHeader>
@@ -126,7 +126,7 @@ export function RSVP() {
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-rose-500 hover:bg-rose-600 text-white" size="lg">
+              <Button type="submit" className="w-full bg-amber-600 hover:bg-amber-700 text-white shadow-md" size="lg">
                 Send RSVP
               </Button>
             </form>

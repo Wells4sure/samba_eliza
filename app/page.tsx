@@ -8,7 +8,7 @@ import { Footer } from "@/components/footer"
 
 export default function WeddingInvitation() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-rose-50 to-pink-50">
+    <main className="min-h-screen bg-gradient-to-b from-amber-50 to-yellow-50">
       <Hero />
       <Story />
       <Details />
