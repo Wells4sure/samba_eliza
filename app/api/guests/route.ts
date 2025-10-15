@@ -3,6 +3,13 @@ import { db, COLLECTIONS } from "@/lib/firebase";
 
 export async function GET() {
   try {
+    if (!db) {
+      return NextResponse.json(
+        { success: false, error: "Firebase not configured" },
+        { status: 500 }
+      );
+    }
+
     // Fetch all registered guests
     const snapshot = await db
       .collection(COLLECTIONS.REGISTRATIONS)

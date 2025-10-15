@@ -3,6 +3,13 @@ import { db, COLLECTIONS } from "@/lib/firebase";
 
 export async function POST(request: Request) {
   try {
+    if (!db) {
+      return NextResponse.json(
+        { valid: false, error: "Firebase not configured" },
+        { status: 500 }
+      );
+    }
+
     const { token } = await request.json();
 
     // Check if token exists and is not used

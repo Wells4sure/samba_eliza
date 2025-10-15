@@ -4,6 +4,14 @@ import { randomBytes } from "crypto";
 
 export async function POST(request: Request) {
   try {
+    // Check if Firebase is initialized
+    if (!db) {
+      return NextResponse.json(
+        { success: false, error: "Firebase not configured. Please set up environment variables." },
+        { status: 500 }
+      );
+    }
+
     const { guestName } = await request.json();
 
     // Generate a unique token
