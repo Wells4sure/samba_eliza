@@ -1,24 +1,22 @@
 import { NextResponse } from "next/server";
-import db from "@/lib/db";
+import { db, COLLECTIONS } from "@/lib/firebase";
 
 export async function POST(request: Request) {
   try {
     const { token } = await request.json();
 
     // Check if token exists and is not used
-    const stmt = db.prepare(
-      "SELECT * FROM registration_links WHERE token = ? AND is_used = 0"
-    );
-    const link = stmt.get(token);
+    const linkDoc = await db.collection(COLLECTIONS.REGISTRATION_LINKS).doc(token).get();
 
-    if (!link) {
+    if (!linkDoc.exists || linkDoc.data()?.is_used) {
       return NextResponse.json(
         { valid: false, message: "Invalid or already used registration link" },
         { status: 400 }
       );
     }
 
-    return NextResponse.json({ valid: true, guestName: link.guest_name });
+    const linkData = linkDoc.data();
+    return NextResponse.json({ valid: true, guestName: linkData?.guest_name });
   } catch (error) {
     console.error("Error validating token:", error);
     return NextResponse.json(

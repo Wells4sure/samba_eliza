@@ -1,17 +1,14 @@
 import { NextResponse } from "next/server";
-import db from "@/lib/db";
+import { db, COLLECTIONS } from "@/lib/firebase";
 
 export async function POST(request: Request) {
   try {
-    const { token, guestName, email, phone, guestsCount, dietaryRestrictions, message } = await request.json();
+    const { token, guestName, phone, guestsCount, dietaryRestrictions, message } = await request.json();
 
     // Validate token first
-    const checkStmt = db.prepare(
-      "SELECT * FROM registration_links WHERE token = ? AND is_used = 0"
-    );
-    const link = checkStmt.get(token);
+    const linkDoc = await db.collection(COLLECTIONS.REGISTRATION_LINKS).doc(token).get();
 
-    if (!link) {
+    if (!linkDoc.exists || linkDoc.data()?.is_used) {
       return NextResponse.json(
         { success: false, error: "Invalid or already used registration link" },
         { status: 400 }
@@ -19,17 +16,20 @@ export async function POST(request: Request) {
     }
 
     // Insert registration
-    const insertStmt = db.prepare(
-      `INSERT INTO registrations (token, guest_name, email, phone, guests_count, dietary_restrictions, message)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`
-    );
-    insertStmt.run(token, guestName, email, phone, guestsCount, dietaryRestrictions, message);
+    await db.collection(COLLECTIONS.REGISTRATIONS).add({
+      token,
+      guest_name: guestName,
+      phone: phone || null,
+      guests_count: guestsCount,
+      dietary_restrictions: dietaryRestrictions || null,
+      message: message || null,
+      registered_at: new Date(),
+    });
 
     // Mark link as used
-    const updateStmt = db.prepare(
-      "UPDATE registration_links SET is_used = 1 WHERE token = ?"
-    );
-    updateStmt.run(token);
+    await db.collection(COLLECTIONS.REGISTRATION_LINKS).doc(token).update({
+      is_used: true,
+    });
 
     return NextResponse.json({ success: true, message: "Registration successful!" });
   } catch (error) {

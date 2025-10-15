@@ -1,15 +1,19 @@
 import { NextResponse } from "next/server";
-import db from "@/lib/db";
+import { db, COLLECTIONS } from "@/lib/firebase";
 
 export async function GET() {
   try {
     // Fetch all registered guests
-    const stmt = db.prepare(
-      `SELECT id, guest_name, email, phone, guests_count, dietary_restrictions, message, registered_at
-       FROM registrations
-       ORDER BY registered_at DESC`
-    );
-    const guests = stmt.all();
+    const snapshot = await db
+      .collection(COLLECTIONS.REGISTRATIONS)
+      .orderBy("registered_at", "desc")
+      .get();
+
+    const guests = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      registered_at: doc.data().registered_at?.toDate().toISOString(),
+    }));
 
     return NextResponse.json({ success: true, guests });
   } catch (error) {

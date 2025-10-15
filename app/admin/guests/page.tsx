@@ -11,7 +11,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Users, ArrowLeft, Download } from "lucide-react";
+import { Users, ArrowLeft, Download, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 interface Guest {
   id: number;
@@ -27,6 +28,7 @@ interface Guest {
 export default function GuestsPage() {
   const [guests, setGuests] = useState<Guest[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchGuests();
@@ -76,7 +78,20 @@ export default function GuestsPage() {
     window.URL.revokeObjectURL(url);
   };
 
+  // Filter guests based on search query
+  const filteredGuests = guests.filter((guest) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      guest.guest_name?.toLowerCase().includes(query) ||
+      guest.email?.toLowerCase().includes(query) ||
+      guest.phone?.toLowerCase().includes(query) ||
+      guest.dietary_restrictions?.toLowerCase().includes(query) ||
+      guest.message?.toLowerCase().includes(query)
+    );
+  });
+
   const totalGuests = guests.reduce((sum, guest) => sum + guest.guests_count, 0);
+  const filteredTotalGuests = filteredGuests.reduce((sum, guest) => sum + guest.guests_count, 0);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-amber-50 to-yellow-50 py-20 px-4">
@@ -88,6 +103,7 @@ export default function GuestsPage() {
             </h1>
             <p className="text-gray-600">
               Total: {guests.length} registrations | {totalGuests} guests
+              {searchQuery && ` (Showing: ${filteredGuests.length} registrations | ${filteredTotalGuests} guests)`}
             </p>
           </div>
           <div className="flex gap-2">
@@ -100,6 +116,25 @@ export default function GuestsPage() {
               Export CSV
             </Button>
           </div>
+        </div>
+
+        {/* Search Filter */}
+        <div className="mb-6">
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Input
+              type="text"
+              placeholder="Search by name, email, phone, dietary restrictions, or message..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 border-amber-300 focus:border-amber-500"
+            />
+          </div>
+          {searchQuery && (
+            <p className="text-sm text-gray-600 mt-2">
+              Found {filteredGuests.length} {filteredGuests.length === 1 ? 'guest' : 'guests'}
+            </p>
+          )}
         </div>
 
         {loading ? (
@@ -118,6 +153,23 @@ export default function GuestsPage() {
               </p>
             </CardContent>
           </Card>
+        ) : filteredGuests.length === 0 ? (
+          <Card className="border-amber-300 shadow-lg">
+            <CardContent className="p-12 text-center">
+              <Search className="w-16 h-16 text-amber-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-serif text-gray-800 mb-2">No Results Found</h2>
+              <p className="text-gray-600">
+                No guests match your search query "{searchQuery}".
+              </p>
+              <Button
+                onClick={() => setSearchQuery("")}
+                variant="outline"
+                className="mt-4 border-amber-300"
+              >
+                Clear Search
+              </Button>
+            </CardContent>
+          </Card>
         ) : (
           <Card className="border-amber-300 shadow-lg">
             <CardHeader>
@@ -132,7 +184,6 @@ export default function GuestsPage() {
                   <TableHeader>
                     <TableRow>
                       <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
                       <TableHead>Phone</TableHead>
                       <TableHead className="text-center">Guests</TableHead>
                       <TableHead>Dietary</TableHead>
@@ -141,10 +192,9 @@ export default function GuestsPage() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {guests.map((guest) => (
+                    {filteredGuests.map((guest) => (
                       <TableRow key={guest.id}>
                         <TableCell className="font-medium">{guest.guest_name}</TableCell>
-                        <TableCell>{guest.email || "—"}</TableCell>
                         <TableCell>{guest.phone || "—"}</TableCell>
                         <TableCell className="text-center">{guest.guests_count}</TableCell>
                         <TableCell className="max-w-xs truncate">

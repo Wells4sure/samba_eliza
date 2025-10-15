@@ -105,6 +105,19 @@ export default function RegisterPage() {
     });
   };
 
+  const startConfettiLoop = () => {
+    // Fire confetti immediately
+    fireConfetti();
+
+    // Then fire every 2.5 seconds
+    const interval = setInterval(() => {
+      fireConfetti();
+    }, 2500);
+
+    // Store interval ID for cleanup if needed
+    return interval;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -123,9 +136,9 @@ export default function RegisterPage() {
 
       if (data.success) {
         setSubmitted(true);
-        // Fire confetti on successful registration
+        // Start looping confetti on successful registration
         setTimeout(() => {
-          fireConfetti();
+          startConfettiLoop();
         }, 300);
       } else {
         alert(data.error || "Registration failed");
