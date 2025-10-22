@@ -1,80 +1,134 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Clock, Camera, Music } from "lucide-react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { Clock, Shirt, MapPin, Users } from "lucide-react";
+import { SectionDivider } from "./section-divider";
 
 export function Details() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const details = [
+    {
+      icon: Clock,
+      title: "Time",
+      content:
+        "1:00 PM - Church Service\n3:30 PM - Photo Session\n7:00 PM - Reception",
+    },
+    {
+      icon: Shirt,
+      title: "Dress Code",
+      content:
+        "Garden Party Attire\nThink florals, pastels,\nand comfortable shoes",
+    },
+    {
+      icon: MapPin,
+      title: "Venue",
+      content: "O'twa Events\nNo.3 Dunduza,\nChisidza Cres, Lusaka",
+    },
+    {
+      icon: Users,
+      title: "Celebration",
+      content:
+        "Join us for a day of\nlove, laughter, and\nunforgettable memories",
+    },
+  ];
+
   return (
-    <section id="details" className="py-20 px-4 bg-white/50">
+    <section
+      ref={sectionRef}
+      id="details"
+      className="py-8 px-4 bg-gradient-to-b from-white/90 to-purple-50/30"
+    >
+      <SectionDivider />
+
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-serif text-center text-gray-800 mb-16">
-          Wedding Details
-        </h2>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-serif text-gray-800 mb-4">
+            The Details
+          </h2>
+          <p className="text-xl font-sans text-gray-600 max-w-2xl mx-auto">
+            Everything you need to know about our special day
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="text-center border-amber-300 shadow-md hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <MapPin className="w-8 h-8 text-amber-600 mx-auto mb-2" />
-              <CardTitle className="text-xl font-serif">Venue</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700">
-                O'twa Events No.3 Dunduza,
-                <br />
-                Chisidza Cres
-                <br />
-                Lusaka
-              </p>
-            </CardContent>
-          </Card>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Portrait Photo */}
+          <div
+            className={`transition-all duration-1000 ${
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-10"
+            }`}
+          >
+            <div className="relative aspect-[3/4] max-w-md mx-auto">
+              <Image
+                src="/images/flowers/flower1.jpg"
+                alt="Wedding portrait"
+                fill
+                className="object-cover rounded-lg shadow-xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg" />
+            </div>
+          </div>
 
-          <Card className="text-center border-amber-300 shadow-md hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <Clock className="w-8 h-8 text-amber-600 mx-auto mb-2" />
-              <CardTitle className="text-xl font-serif">Timeline</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700">
-                1:00 PM - Church service unza chapel
-                <br />
-                3:30 PM - Photo Session
-                <br />
-                7:00 PM - Reception
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center border-amber-300 shadow-md hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <Camera className="w-8 h-8 text-amber-600 mx-auto mb-2" />
-              <CardTitle className="text-xl font-serif">Dress Code</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700">
-                Garden Party Attire
-                <br />
-                <span className="text-sm">
-                  Think florals, pastels,
-                  <br />
-                  and comfortable shoes
-                </span>
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center border-amber-300 shadow-md hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <Music className="w-8 h-8 text-amber-600 mx-auto mb-2" />
-              <CardTitle className="text-xl font-serif">Music</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700">
-                Live acoustic ceremony
-                <br />
-                DJ for reception
-                <br />
-                Dancing until midnight
-              </p>
-            </CardContent>
-          </Card>
+          {/* Quick Facts */}
+          <div
+            className={`space-y-8 transition-all duration-1000 delay-300 ${
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-10"
+            }`}
+          >
+            {details.map((detail, index) => {
+              const Icon = detail.icon;
+              return (
+                <div
+                  key={detail.title}
+                  className={`flex items-start space-x-4 transition-all duration-700 ${
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: `${(index + 2) * 200}ms` }}
+                >
+                  <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-serif text-gray-800 mb-2">
+                      {detail.title}
+                    </h3>
+                    <p className="font-sans text-gray-600 whitespace-pre-line leading-relaxed">
+                      {detail.content}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

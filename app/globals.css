@@ -1,14 +1,51 @@
+@import 'leaflet/dist/leaflet.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .font-script {
+    font-family: var(--font-dancing-script), cursive;
+  }
+  
+  .font-serif {
+    font-family: var(--font-playfair), serif;
+  }
+  
+  .font-sans {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .animate-ken-burns {
+    animation: kenBurns 20s ease-in-out infinite;
+  }
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  25% {
+    transform: scale(1.1) translate(-2%, -1%);
+  }
+  50% {
+    transform: scale(1.15) translate(1%, -2%);
+  }
+  75% {
+    transform: scale(1.1) translate(-1%, 1%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
   }
 }
 

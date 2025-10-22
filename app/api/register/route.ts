@@ -10,7 +10,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { token, guestName, phone, guestsCount, dietaryRestrictions, message } = await request.json();
+    const { token, guestName, phone, attendance, guestsCount, familySide, dietaryRestrictions, message } = await request.json();
 
     // Validate token first
     const linkDoc = await db.collection(COLLECTIONS.REGISTRATION_LINKS).doc(token).get();
@@ -27,7 +27,9 @@ export async function POST(request: Request) {
       token,
       guest_name: guestName,
       phone: phone || null,
+      attendance: attendance || null,
       guests_count: guestsCount,
+      family_side: familySide || null,
       dietary_restrictions: dietaryRestrictions || null,
       message: message || null,
       registered_at: new Date(),

@@ -47,19 +47,21 @@ export default function AdminPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-amber-50 to-yellow-50 py-20 px-4">
+    <main className="min-h-screen bg-gradient-to-b from-[#F6F3F8] to-white py-20 px-4">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-serif text-center text-gray-800 mb-8">
-          Admin Panel
-        </h1>
-        <p className="text-center text-gray-600 mb-12">
-          Generate unique registration links for your guests
-        </p>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-serif text-gray-800 mb-4">
+            Wedding Admin Panel
+          </h1>
+          <p className="text-xl font-sans text-gray-600 max-w-2xl mx-auto">
+            Generate unique registration links for your guests
+          </p>
+        </div>
 
-        <Card className="border-amber-300 shadow-lg mb-6">
+        <Card className="border-purple-300 shadow-lg mb-6">
           <CardHeader>
             <CardTitle className="text-2xl font-serif flex items-center gap-2">
-              <LinkIcon className="w-6 h-6 text-amber-600" />
+              <LinkIcon className="w-6 h-6 text-purple-600" />
               Generate Registration Link
             </CardTitle>
           </CardHeader>
@@ -82,7 +84,7 @@ export default function AdminPage() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-amber-600 hover:bg-amber-700 text-white shadow-md"
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white shadow-md"
                 size="lg"
               >
                 {loading ? "Generating..." : "Generate Link"}
@@ -138,7 +140,7 @@ export default function AdminPage() {
           <Button
             onClick={() => (window.location.href = "/admin/guests")}
             variant="outline"
-            className="border-amber-300"
+            className="border-purple-300"
           >
             View Registered Guests
           </Button>
