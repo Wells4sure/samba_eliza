@@ -32,6 +32,7 @@ export default function RegisterPage() {
   const [isValid, setIsValid] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const [formData, setFormData] = useState({
     guestName: "",
@@ -221,7 +222,16 @@ export default function RegisterPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#F6F3F8] to-white">
-      <Hero />
+      {!imagesLoaded && (
+        <div className="fixed inset-0 bg-gradient-to-b from-[#F6F3F8] to-white flex items-center justify-center z-50">
+          <div className="text-center">
+            <Heart className="w-16 h-16 text-purple-500 mx-auto mb-4 animate-pulse" />
+            <p className="text-xl font-serif text-gray-700">Loading beautiful moments...</p>
+          </div>
+        </div>
+      )}
+      
+      <Hero onImagesLoaded={() => setImagesLoaded(true)} />
       <Details />
       <Location />
       {/* Registration Form Section */}

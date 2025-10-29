@@ -60,21 +60,21 @@ export function Details() {
     <section
       ref={sectionRef}
       id="details"
-      className="py-8 px-4 bg-gradient-to-b from-white/90 to-purple-50/30"
+      className="py-8 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-white/90 to-purple-50/30"
     >
       <SectionDivider />
 
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-gray-800 mb-4">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gray-800 mb-4">
             The Details
           </h2>
-          <p className="text-xl font-sans text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl font-sans text-gray-600 max-w-2xl mx-auto px-4">
             Everything you need to know about our special day
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
           {/* Portrait Photo */}
           <div
             className={`transition-all duration-1000 ${
@@ -83,7 +83,7 @@ export function Details() {
                 : "opacity-0 -translate-x-10"
             }`}
           >
-            <div className="relative aspect-[3/4] max-w-md mx-auto">
+            <div className="relative aspect-[3/4] max-w-xs sm:max-w-sm md:max-w-md mx-auto">
               <Image
                 src="/images/flowers/flower1.jpg"
                 alt="Wedding portrait"
@@ -96,7 +96,7 @@ export function Details() {
 
           {/* Quick Facts */}
           <div
-            className={`space-y-8 transition-all duration-1000 delay-300 ${
+            className={`space-y-6 sm:space-y-8 transition-all duration-1000 delay-300 ${
               isVisible
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-10"
@@ -107,21 +107,21 @@ export function Details() {
               return (
                 <div
                   key={detail.title}
-                  className={`flex items-start space-x-4 transition-all duration-700 ${
+                  className={`flex items-start space-x-3 sm:space-x-4 transition-all duration-700 ${
                     isVisible
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-4"
                   }`}
                   style={{ transitionDelay: `${(index + 2) * 200}ms` }}
                 >
-                  <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-purple-600" />
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-serif text-gray-800 mb-2">
+                    <h3 className="text-lg sm:text-xl font-serif text-gray-800 mb-2">
                       {detail.title}
                     </h3>
-                    <p className="font-sans text-gray-600 whitespace-pre-line leading-relaxed">
+                    <p className="font-sans text-sm sm:text-base text-gray-600 whitespace-pre-line leading-relaxed">
                       {detail.content}
                     </p>
                   </div>
