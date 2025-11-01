@@ -35,13 +35,13 @@ export function Details() {
       icon: Clock,
       title: "Time",
       content:
-        "1:00 PM - Church Service\n3:30 PM - Photo Session\n7:00 PM - Reception",
+        "1:30 PM - Church Service\n3:30 PM - Photo Session\n5:30 PM - Reception",
     },
     {
       icon: Shirt,
       title: "Dress Code",
       content:
-        "Garden Party Attire\nThink florals, pastels,\nand comfortable shoes",
+        "Women \nBlack with a touch of Gold\nMen, black and white.\nand comfortable shoes",
     },
     {
       icon: MapPin,
