@@ -406,6 +406,54 @@ export default function RegisterPage() {
               </form>
             </CardContent>
           </Card>
+
+          {/* Important Information Section */}
+          <Card className="border-purple-300 bg-lavender-100 shadow-lg mt-6" style={{backgroundColor: '#E6E6FA'}}>
+            <CardContent className="p-6">
+              <h3 className="text-xl font-semibold text-purple-800 mb-4 text-center">
+                📋 Important Information
+              </h3>
+              <div className="space-y-4 text-sm md:text-base">
+                <div className="bg-white p-4 rounded-lg border border-purple-200">
+                  <p className="text-gray-800 font-medium">
+                    💝 <span className="font-semibold">Gifts:</span> Gifts in monetary form will be appreciated (ZMW 500 and above)
+                  </p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg border border-purple-200">
+                  <p className="text-gray-800 font-medium">
+                    ⏰ <span className="font-semibold">Time:</span> Kindly strictly observe time
+                  </p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg border border-purple-200">
+                  <p className="text-gray-800 font-medium">
+                    👶 <span className="font-semibold">Children:</span> Strictly no children
+                  </p>
+                </div>
+                
+                <div className="bg-purple-100 p-4 rounded-lg border border-purple-300">
+                  <p className="text-purple-800 font-medium mb-2">
+                    📞 <span className="font-semibold">For queries, please reach out to:</span>
+                  </p>
+                  <div className="space-y-2 text-purple-700">
+                    <p className="flex flex-col sm:flex-row sm:items-center gap-1">
+                      <span className="font-medium">Lucas Mulenga:</span>
+                      <a href="tel:0977431855" className="text-purple-600 hover:text-purple-800 underline">
+                        0977431855
+                      </a>
+                    </p>
+                    <p className="flex flex-col sm:flex-row sm:items-center gap-1">
+                      <span className="font-medium">Linda Musonda Nyirongo:</span>
+                      <a href="tel:0979531114" className="text-purple-600 hover:text-purple-800 underline">
+                        0979531114
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
       <Countdown />
