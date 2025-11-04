@@ -130,6 +130,63 @@ export function Details() {
             })}
           </div>
         </div>
+
+        {/* Important Information Section */}
+        <div 
+          className={`mt-12 sm:mt-16 md:mt-20 transition-all duration-1000 delay-1000 ${
+            isVisible 
+              ? "opacity-100 translate-y-0" 
+              : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div 
+            className="border-purple-300 shadow-lg rounded-lg p-6 sm:p-8 max-w-4xl mx-auto"
+            style={{backgroundColor: '#E6E6FA'}}
+          >
+            <h3 className="text-2xl sm:text-3xl font-serif text-purple-800 mb-6 text-center">
+              📋 Important Information
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="bg-white p-4 sm:p-5 rounded-lg border border-purple-200">
+                <p className="text-gray-800 font-medium text-sm sm:text-base">
+                  💝 <span className="font-semibold">Gifts:</span> Gifts in monetary form will be appreciated (ZMW 500 and above)
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 sm:p-5 rounded-lg border border-purple-200">
+                <p className="text-gray-800 font-medium text-sm sm:text-base">
+                  ⏰ <span className="font-semibold">Time:</span> Kindly strictly observe time
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 sm:p-5 rounded-lg border border-purple-200">
+                <p className="text-gray-800 font-medium text-sm sm:text-base">
+                  👶 <span className="font-semibold">Children:</span> Strictly no children
+                </p>
+              </div>
+              
+              <div className="bg-purple-100 p-4 sm:p-5 rounded-lg border border-purple-300 sm:col-span-2">
+                <p className="text-purple-800 font-medium mb-3 text-sm sm:text-base">
+                  📞 <span className="font-semibold">For queries, please reach out to:</span>
+                </p>
+                <div className="space-y-2 text-purple-700 text-sm sm:text-base">
+                  <p className="flex flex-col sm:flex-row sm:items-center gap-1">
+                    <span className="font-medium">Lucas Mulenga:</span>
+                    <a href="tel:0977431855" className="text-purple-600 hover:text-purple-800 underline">
+                      0977431855
+                    </a>
+                  </p>
+                  <p className="flex flex-col sm:flex-row sm:items-center gap-1">
+                    <span className="font-medium">Linda Musonda Nyirongo:</span>
+                    <a href="tel:0979531114" className="text-purple-600 hover:text-purple-800 underline">
+                      0979531114
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
