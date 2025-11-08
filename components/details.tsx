@@ -41,7 +41,7 @@ export function Details() {
       icon: Shirt,
       title: "Dress Code",
       content:
-        "Women \nBlack with a touch of Gold\nMen, black and white.\nand comfortable shoes",
+        "Women \nBlack with a touch of Gold\nMen\n black and white with comfortable shoes",
     },
     {
       icon: MapPin,
@@ -171,9 +171,9 @@ export function Details() {
                 </p>
                 <div className="space-y-2 text-purple-700 text-sm sm:text-base">
                   <p className="flex flex-col sm:flex-row sm:items-center gap-1">
-                    <span className="font-medium">Lucas Mulenga:</span>
+                    <span className="font-medium">Charity Mulenga:</span>
                     <a href="tel:0977431855" className="text-purple-600 hover:text-purple-800 underline">
-                      0977431855
+                      0977669175
                     </a>
                   </p>
                   <p className="flex flex-col sm:flex-row sm:items-center gap-1">
