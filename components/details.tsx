@@ -35,13 +35,13 @@ export function Details() {
       icon: Clock,
       title: "Time",
       content:
-        "1:30 PM - Church Service\n3:30 PM - Photo Session\n5:30 PM - Reception",
+        "1:30 PM - Church Service - UNZA Chapel\n3:30 PM - Photo Session\n5:30 PM - Reception",
     },
     {
       icon: Shirt,
       title: "Dress Code",
       content:
-        "Women \nBlack with a touch of Gold\nMen\n black and white with comfortable shoes",
+        "Women \nBlack with a touch of Gold\nMen\n Black and white with comfortable shoes",
     },
     {
       icon: MapPin,
