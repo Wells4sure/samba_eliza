@@ -155,7 +155,7 @@ export function Details() {
               
               <div className="bg-white p-4 sm:p-5 rounded-lg border border-purple-200">
                 <p className="text-gray-800 font-medium text-sm sm:text-base">
-                  ⏰ <span className="font-semibold">Time:</span> Kindly strictly observe time
+                  ⏰ <span className="font-semibold">Time:</span> Kindly observe time
                 </p>
               </div>
               

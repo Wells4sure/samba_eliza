@@ -422,7 +422,7 @@ export default function RegisterPage() {
                 
                 <div className="bg-white p-4 rounded-lg border border-purple-200">
                   <p className="text-gray-800 font-medium">
-                    ⏰ <span className="font-semibold">Time:</span> Kindly strictly observe time
+                    ⏰ <span className="font-semibold">Time:</span> Kindly observe time
                   </p>
                 </div>
                 
