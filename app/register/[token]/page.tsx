@@ -416,7 +416,7 @@ export default function RegisterPage() {
               <div className="space-y-4 text-sm md:text-base">
                 <div className="bg-white p-4 rounded-lg border border-purple-200">
                   <p className="text-gray-800 font-medium">
-                    💝 <span className="font-semibold">Gifts:</span> Gifts in monetary form will be appreciated (ZMW 500 and above)
+                    💝 <span className="font-semibold">Gifts:</span> Gifts in monetary form will be appreciated (ZMW 500 and above) <strong>260971623411 - Elizabeth Nyirongo</strong>
                   </p>
                 </div>
                 

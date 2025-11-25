@@ -149,7 +149,7 @@ export function Details() {
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               <div className="bg-white p-4 sm:p-5 rounded-lg border border-purple-200">
                 <p className="text-gray-800 font-medium text-sm sm:text-base">
-                  💝 <span className="font-semibold">Gifts:</span> Gifts in monetary form will be appreciated (ZMW 500 and above)
+                  💝 <span className="font-semibold">Gifts:</span> Gifts in monetary form will be appreciated (ZMW 500 and above) <strong>260971623411 - Elizabeth Nyirongo</strong>
                 </p>
               </div>
               

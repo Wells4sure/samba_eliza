@@ -11,12 +11,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Users, ArrowLeft, Download, Search, CheckCircle, XCircle } from "lucide-react";
+import { Users, ArrowLeft, Download, Search, CheckCircle, XCircle, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface Guest {
-  id: number;
+  id: string;
   guest_name: string;
   phone: string;
   attendance: string;
@@ -31,7 +31,7 @@ export default function GuestsPage() {
   const [guests, setGuests] = useState<Guest[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedGuests, setSelectedGuests] = useState<Set<number>>(new Set());
+  const [selectedGuests, setSelectedGuests] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetchGuests();
@@ -55,6 +55,33 @@ export default function GuestsPage() {
     }
   };
 
+  const deleteGuest = async (guestId: string) => {
+    if (!confirm("Are you sure you want to delete this guest registration?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/guests/${guestId}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        setGuests(guests.filter(guest => guest.id !== guestId));
+        setSelectedGuests(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(guestId);
+          return newSet;
+        });
+      } else {
+        alert("Failed to delete guest: " + data.error);
+      }
+    } catch (error) {
+      console.error("Error deleting guest:", error);
+      alert("An error occurred while deleting guest");
+    }
+  };
+
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
       setSelectedGuests(new Set(filteredGuests.map(guest => guest.id)));
@@ -63,7 +90,7 @@ export default function GuestsPage() {
     }
   };
 
-  const handleSelectGuest = (guestId: number, checked: boolean) => {
+  const handleSelectGuest = (guestId: string, checked: boolean) => {
     const newSelected = new Set(selectedGuests);
     if (checked) {
       newSelected.add(guestId);
@@ -233,6 +260,7 @@ export default function GuestsPage() {
                       <TableHead className="hidden md:table-cell">Dietary</TableHead>
                       <TableHead className="hidden lg:table-cell">Message</TableHead>
                       <TableHead className="hidden sm:table-cell">Registered</TableHead>
+                      <TableHead className="w-16">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -278,11 +306,24 @@ export default function GuestsPage() {
                         <TableCell className="max-w-xs truncate hidden md:table-cell">
                           {guest.dietary_restrictions || "—"}
                         </TableCell>
-                        <TableCell className="max-w-xs truncate hidden lg:table-cell">
-                          {guest.message || "—"}
+                        <TableCell className="max-w-xs hidden lg:table-cell">
+                          <div className="max-h-20 overflow-y-auto">
+                            <p className="text-sm whitespace-pre-wrap break-words">{guest.message || "—"}</p>
+                          </div>
                         </TableCell>
                         <TableCell className="hidden sm:table-cell">
                           {new Date(guest.registered_at).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            onClick={() => deleteGuest(guest.id)}
+                            variant="ghost"
+                            size="sm"
+                            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                            title="Delete guest"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
