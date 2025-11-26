@@ -14,10 +14,10 @@ export function Footer() {
           <p className="font-sans text-sm text-gray-400">
             Questions? Contact us at{" "}
             <a
-              href="mailto:iamwchanda@gmail.com"
+              href="mailto:silverhousetech@gmail.com"
               className="text-rose-400 hover:underline"
             >
-              WC Solution
+              SILVER HOUSE TECHNOLOGY ENT
             </a>
           </p>
         </div>
